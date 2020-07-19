@@ -1,6 +1,6 @@
 <?php
 
-$loader = require_once realpath(__DIR__ . "/../vendor/autoload.php");
+require_once realpath(__DIR__ . "/../vendor/autoload.php");
 
 if (App\Config::DEBUG_MODE) {
     ini_set('display_errors', 1);
@@ -19,9 +19,15 @@ $di->register("config", "\App\Config")
     ->register("router", "\NanoPHP\Router")
     ->register("encrypter", "\NanoPHP\Library\Encrypter");
 
+$twigLoader = new \Twig\Loader\FilesystemLoader(App\Config::VIEWS_PATH);
+$twig = new \Twig\Environment($twigLoader, [
+    'cache' => App\Config::CACHE_PATH,
+]);
+
 $routes = App\Routes::getRoutes();
 $router = $di->make('router')
                 ->setDependencyInjector($di)
                 ->setURI($URI)
+                ->setMethod($_SERVER['REQUEST_METHOD'])
                 ->setRoutes($routes)
                 ->route();
