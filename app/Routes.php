@@ -7,7 +7,12 @@ class Routes
     public static function getRoutes(): array
     {
         return [
-            '/' => 'Home@homepage',
+            [
+                'method' => 'GET',
+                'route'  => [
+                    '/' => 'Home@homepage'
+                ]
+            ]
         ];
     }
 }
