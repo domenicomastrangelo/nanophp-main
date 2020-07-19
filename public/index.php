@@ -19,11 +19,6 @@ $di->register("config", "\App\Config")
     ->register("router", "\NanoPHP\Router")
     ->register("encrypter", "\NanoPHP\Library\Encrypter");
 
-$twigLoader = new \Twig\Loader\FilesystemLoader(App\Config::VIEWS_PATH);
-$twig = new \Twig\Environment($twigLoader, [
-    'cache' => App\Config::CACHE_PATH,
-]);
-
 $routes = App\Routes::getRoutes();
 $router = $di->make('router')
                 ->setDependencyInjector($di)
