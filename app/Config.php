@@ -6,6 +6,7 @@ class Config
 {
     public const BASE_PATH = __DIR__ . '/..';
     public const VIEWS_PATH = __DIR__ . '/Views';
+    public const CACHE_PATH = __DIR__ . '/Cache';
 
     public const DB_NAME = 'database';
     public const DB_USER = 'user';
